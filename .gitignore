@@ -1,0 +1,40 @@
+# Compiled class files
+*.class
+bin/
+out/
+target/
+build/
+
+# Logs
+*.log
+
+# BlueJ files
+*.ctxt
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+# Packages
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# JVM crash logs
+hs_err_pid*
+replay_pid*
+
+# VS Code settings
+.vscode/
+
+# temp folders
+**/temp/
+*.tmp
+
+# file
+generate-docs.ps1
+
+
