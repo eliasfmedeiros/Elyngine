@@ -162,25 +162,25 @@ public abstract class Vector2D {
 		}
 
 		@Override
-		public int xToInt() {	return (int) x;	}
+		public int xToInt() {	return x.intValue();	}
 
 		@Override
-		public float xToFloat() {	return (float) x;	}
+		public float xToFloat() {	return x.floatValue();	}
 
 		@Override
-		public double xToDouble() {	return (double) x;	}
+		public double xToDouble() {	return x.doubleValue();	}
 
 		@Override
 		protected String xToString() {	return "" + x;	}
 
 		@Override
-		public int yToInt() {	return (int) y;	}
+		public int yToInt() {	return y.intValue();	}
 
 		@Override
-		public float yToFloat() {	return (float) y;	}
+		public float yToFloat() {	return y.floatValue();	}
 
 		@Override
-		public double yToDouble() {	return (double) y;	}
+		public double yToDouble() {	return y.doubleValue();	}
 
 		@Override
 		protected String yToString() {	return "" + y;	}
