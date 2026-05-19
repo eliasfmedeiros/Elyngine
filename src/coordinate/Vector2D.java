@@ -1,117 +1,202 @@
 package coordinate;
 
-public abstract class Vector2D {      
+public abstract class Vector2D {
 
-    public static double degreesToRadians(double degrees) { 
-        return Math.toRadians(degrees);
-    }
+	public static final Vector2D ZERO = new Vector2D.Boxed(0f, 0f).asReadOnly();
+	public static final Vector2D UP =	new Vector2D.Boxed(0f, 1f).asReadOnly();
+	public static final Vector2D DOWN = new Vector2D.Boxed(0f, -1f).asReadOnly();
+	public static final Vector2D RIGH = new Vector2D.Boxed(1f, 0f).asReadOnly();
+	public static final Vector2D LEFT = new Vector2D.Boxed(-1f, 0f).asReadOnly();
 
-    public static double radiansToDegrees(double radians) { 
-        return Math.toDegrees(radians);
-    }
+	public static double degreesToRadians(double degrees) {
+		return Math.toRadians(degrees);
+	}
 
-    public abstract byte xToByte();
-    public abstract short xToShort();
-    public abstract int xToInt();
-    public abstract long xToLong();
-    public abstract float xToFloat();
-    public abstract double xToDouble();
-    protected abstract String xToString();
+	public static double radiansToDegrees(double radians) {
+		return Math.toDegrees(radians);
+	}
 
-    public abstract byte yToByte();
-    public abstract short yToShort();
-    public abstract int yToInt();
-    public abstract long yToLong();
-    public abstract float yToFloat();
-    public abstract double yToDouble();
-    protected abstract String yToString();
-        
-    public  Vector2D asReadOnly() {
-        Vector2D that = this;
-        return new Vector2D() {
-            @Override public byte xToByte() { return that.xToByte(); }
-            @Override public short xToShort() { return that.xToShort(); }
-            @Override public int xToInt() { return that.xToInt(); }
-            @Override public long xToLong() { return that.xToLong(); }
-            @Override public float xToFloat() { return that.xToFloat(); }
-            @Override public double xToDouble() { return that.xToDouble(); }
-            @Override protected String xToString() { return that.xToString(); }
-            
-            @Override public byte yToByte() { return that.yToByte(); }
-            @Override public short yToShort() { return that.yToShort(); }
-            @Override public int yToInt() { return that.yToInt(); }
-            @Override public long yToLong() { return that.yToLong(); }
-            @Override public float yToFloat() { return that.yToFloat(); }
-            @Override public double yToDouble() { return that.yToDouble(); }
-            @Override protected String yToString() { return that.yToString(); }
+	public abstract int xToInt();
 
-            @Override public Vector2D asReadOnly() { return this; }  
-        };
-    }
+	public abstract float xToFloat();
 
-    protected Double2D toDouble2D() { return new Double2D(xToDouble(), yToDouble()); }
-    protected Float2D toFloat2D() { return new Float2D(xToFloat(), yToFloat()); }
+	public abstract double xToDouble();
 
-    public boolean isZero() { return this.xToDouble()==0d&&this.yToDouble()==0d; }    
+	protected abstract String xToString();
 
-    public double magnitudeSquared() {  
-        double x = this.xToDouble(), y = this.yToDouble();
-        return x * x + y * y;
-    }
-    
-    /** Returns the vector magnitude (length) using Euclidean distance. */
-    public double magnitude() {  
-        return Math.sqrt(magnitudeSquared());
-    }    
-    
-    public  double cosAngleTo(Vector2D other) {    
-        double dot=this.xToDouble() * other.xToDouble() + this.yToDouble() * other.yToDouble();
-        return Math.clamp( dot / (this.magnitude() * other.magnitude()), -1,1);
-    }
-    
-    public double angleTo(Vector2D other) {   
-        return Math.acos(cosAngleTo(other));
-    }
-    
-    public Vector2D getPointerTo(Vector2D target) {  // sobrescrever para parametro com subtipo
-        Vector2D that = this;
-        return new Vector2D() {
-            private double x(){return target.xToDouble()-that.xToDouble(); }
-            private double y(){return target.yToDouble()-that.yToDouble(); }
+	public abstract int yToInt();
 
-            @Override public byte xToByte() { return (byte)(x()); }
-            @Override public short xToShort() { return (short)(x()); }
-            @Override public int xToInt() { return (int) x(); }
-            @Override public long xToLong() { return (long) x(); }
-            @Override public float xToFloat() { return (float) x(); }
-            @Override public double xToDouble() { return (double)x(); }
-            @Override protected String xToString() { return ""+x(); }
+	public abstract float yToFloat();
 
-            @Override public byte yToByte() { return (byte)(y()); }
-            @Override public short yToShort() { return (short)(y()); }
-            @Override public int yToInt() { return (int) y(); }
-            @Override public long yToLong() { return (long) y(); }
-            @Override public float yToFloat() { return (float) y(); }
-            @Override public double yToDouble() { return (double)y(); }
-            @Override protected String yToString() { return ""+y(); }
+	public abstract double yToDouble();
 
-            @Override public Vector2D asReadOnly() { return this; }
-        };
-    }
-    
-    @Override
-    public boolean equals(Object o) {   
-        if(o==null || !(o instanceof Vector2D)) return false;
-        return equals((Vector2D)o);
-    }
-    
-    private boolean equals(Vector2D that){   
-        return that.xToDouble()==this.xToDouble() && that.yToDouble()==this.yToDouble();
-    }
+	protected abstract String yToString();
 
-    /** Returns a string representation of the vector in the format: Vector2D{x=..., y=...}  */
-    @Override
-    public String toString() {
-        return Vector2D.class.getSimpleName() + '{' +"x="+xToString()+", y="+yToString()+ '}';
-    }
+	public byte xToByte() {	return (byte) xToInt();	}
+
+	public short xToShort() { return (short) xToInt(); }
+
+	public byte yToByte() {	return (byte) yToInt();	}
+
+	public short yToShort() { return (short) yToInt(); }
+
+	public Vector2D asReadOnly() {
+		Vector2D that = this;
+		return new Vector2D() {
+
+			@Override
+			public int xToInt() {   return that.xToInt(); } 
+
+			@Override
+			public float xToFloat() {	return that.xToFloat();	}
+
+			@Override
+			public double xToDouble() {	return that.xToDouble();	}
+
+			@Override
+			protected String xToString() {	return that.xToString();	}
+
+			@Override
+			public int yToInt() {	return that.yToInt();	}
+
+			@Override
+			public float yToFloat() {	return that.yToFloat();	}
+
+			@Override
+			public double yToDouble() {	return that.yToDouble();	}
+
+			@Override
+			protected String yToString() {	return that.yToString();	}
+
+			@Override
+			public Vector2D asReadOnly() {	return this;	}
+		};
+	}
+
+	public Byte2D toByte2D() {
+		return new Byte2D(xToByte(), yToByte());
+	}
+
+	public Short2D toShort2D() {
+		return new Short2D(xToShort(), yToShort());
+	}
+
+	public Integer2D toInt2D() {
+		return new Integer2D(xToInt(), yToInt());
+	}
+
+	public Float2D toFloat2D() {
+		return new Float2D(xToFloat(), yToFloat());
+	}
+
+	public Double2D toDouble2D() {
+		return new Double2D(xToDouble(), yToDouble());
+	}
+
+	public boolean isZero() {
+		return this.xToDouble() == 0d && this.yToDouble() == 0d;
+	}
+
+	public double magnitudeSquared() {
+		double x = this.xToDouble(), y = this.yToDouble();
+		return x * x + y * y;
+	}
+
+	/** Returns the vector magnitude (length) using Euclidean distance. */
+	public double magnitude() {
+		return Math.sqrt(magnitudeSquared());
+	}
+
+	public double cosAngleTo(Vector2D other) {
+		double mag = this.magnitude() * other.magnitude();
+		if (mag == 0)
+			throw new ArithmeticException("Cannot operate with zero-magnitude vector.");
+		double dot = this.xToDouble() * other.xToDouble() + this.yToDouble() * other.yToDouble();
+		return Math.clamp(dot / mag, -1, 1);
+	}
+
+	public double angleTo(Vector2D other) {
+		return Math.acos(cosAngleTo(other));
+	}
+
+	public Vector2D displacementTo(Vector2D target) {
+		Vector2D that = this;
+		return new Vector2D.Boxed(
+				new DoubleSupplier() {
+					@Override
+					public double doubleValue() {
+						return target.xToDouble() - that.xToDouble();
+					}
+				},
+				new DoubleSupplier() {
+					@Override
+					public double doubleValue() {
+						return target.yToDouble() - that.yToDouble();
+					}
+				}
+			);
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (o == null || !(o instanceof Vector2D))
+			return false;
+		return equals((Vector2D) o);
+	}
+
+	private boolean equals(Vector2D that) {
+		return that.xToDouble() == this.xToDouble() && that.yToDouble() == this.yToDouble();
+	}
+
+	@Override
+	public String toString() {
+		return Vector2D.class.getSimpleName() + '{' + "x=" + xToString() + ", y=" + yToString() + '}';
+	}
+
+	public static final class Boxed extends Vector2D {
+		public Number x, y;
+
+		public Boxed(Number x, Number y) {
+			this.x = x;
+			this.y = y;
+		}
+
+		@Override
+		public int xToInt() {	return (int) x;	}
+
+		@Override
+		public float xToFloat() {	return (float) x;	}
+
+		@Override
+		public double xToDouble() {	return (double) x;	}
+
+		@Override
+		protected String xToString() {	return "" + x;	}
+
+		@Override
+		public int yToInt() {	return (int) y;	}
+
+		@Override
+		public float yToFloat() {	return (float) y;	}
+
+		@Override
+		public double yToDouble() {	return (double) y;	}
+
+		@Override
+		protected String yToString() {	return "" + y;	}
+
+		public Vector2D.Boxed copy() {	return new Boxed(x, y);	}
+	}
+
+	static abstract class DoubleSupplier extends Number {
+		@Override
+		public int intValue() {	return (int) doubleValue();	}
+
+		@Override
+		public long longValue() {	return (long) doubleValue();	}
+
+		@Override
+		public float floatValue() {	return (float) doubleValue();	}
+	};
+
 }
