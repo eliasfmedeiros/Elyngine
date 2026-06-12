@@ -19,4 +19,27 @@ public interface UnidirectionalNode<T> {
         return this.getNext() != null;
     }
 
+	public interface StackerNode<T> extends UnidirectionalNode<T> {
+	    default T peek() {
+	        return this.getNext().getContent();
+	    }
+
+	    default void pushNext(UnidirectionalNode<T> link) {
+	        link.setNext(this.getNext());
+	        this.setNext(link);
+	    }
+
+	    default StackerNode<T> pushNext(T content) {
+	        UniNode<T> node = new UniNode<>(content, this.getNext());
+	        this.setNext(node);
+	        return node;
+	    }
+
+	    default UnidirectionalNode<T> popNext() {
+	        UnidirectionalNode<T> removed = this.getNext();
+	        if (removed == null) return null;
+	        this.setNext(removed.getNext());
+	        return removed;
+	    }
+	}
 }
