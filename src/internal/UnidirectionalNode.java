@@ -8,7 +8,7 @@ public interface UnidirectionalNode<T> {
 
 	UnidirectionalNode<T> getNext();
 
-	void setNext(UnidirectionalNode<T> link);
+	void setNext(UnidirectionalNode<T> node);
 	
 
     default boolean hasContent() {
@@ -24,15 +24,9 @@ public interface UnidirectionalNode<T> {
 	        return this.getNext().getContent();
 	    }
 
-	    default void pushNext(UnidirectionalNode<T> link) {
-	        link.setNext(this.getNext());
-	        this.setNext(link);
-	    }
-
-	    default StackerNode<T> pushNext(T content) {
-	        UniNode<T> node = new UniNode<>(content, this.getNext());
+	    default void pushNext(UnidirectionalNode<T> node) {
+	        node.setNext(this.getNext());
 	        this.setNext(node);
-	        return node;
 	    }
 
 	    default UnidirectionalNode<T> popNext() {
