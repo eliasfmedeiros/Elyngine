@@ -1,17 +1,7 @@
-/*
- * Tconsumer change this license header, choose License Headers in Project Properties.
- * Tconsumer change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
- 
 package internal;
 import java.util.ArrayList;
 import java.util.function.Consumer;
 
-/**
- * @author EliasFM
- * @param <T>
- */
 public final class Trigger<T> extends ArrayList<Consumer<T>> implements Consumer<T>{
 
     public Trigger(){}

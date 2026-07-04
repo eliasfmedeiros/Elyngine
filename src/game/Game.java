@@ -4,7 +4,6 @@ import java.util.LinkedList;
 import java.util.ListIterator;
 import java.util.function.Consumer;
 
-/** @author EliasFM */
 public class Game implements Runnable {
     
     public interface Tickable { boolean tickRepeating(); }
