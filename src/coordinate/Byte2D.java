@@ -1,6 +1,6 @@
 package coordinate;
 
-public class Byte2D implements IntegerVector2D {
+public class Byte2D extends AbstractVector2D implements IntegerVector2D {
 	private byte x, y;
 	
 	public Byte2D(int x, int y) {
@@ -23,4 +23,5 @@ public class Byte2D implements IntegerVector2D {
 	public void setOrderedPair(int x, int y) { 
 		this.x = (byte) x;	 this.y = (byte) y;
 	}
+
 }

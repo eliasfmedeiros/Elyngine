@@ -1,6 +1,6 @@
 package coordinate;
 
-public class Double2D implements FloatingVector2D {
+public class Double2D extends AbstractVector2D implements FloatingVector2D {
 
 	public static Vector2D displacement(Vector2D initial,Vector2D terminal) {
 		return new Vector2D.BoxedVector2D(
@@ -43,4 +43,5 @@ public class Double2D implements FloatingVector2D {
 	public Double2D copy() { return new Double2D(x, y); }
 	@Override
 	public void setOrderedPair(double x, double y) { this.x=x; this.y=y; }
+
 }

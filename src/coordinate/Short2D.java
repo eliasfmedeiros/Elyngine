@@ -1,6 +1,6 @@
 package coordinate;
 
-public class Short2D implements IntegerVector2D {
+public class Short2D extends AbstractVector2D implements IntegerVector2D {
 	private short x, y;
 	
 	public Short2D(int x, int y) {
@@ -23,4 +23,5 @@ public class Short2D implements IntegerVector2D {
 	public void setOrderedPair(int x, int y) { 
 		this.x = (short) x;	 this.y = (short) y;
 	}
+
 }

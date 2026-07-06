@@ -44,9 +44,9 @@ public interface Vector2D {
 
 	default short yToShort() { return (short) yToInt(); }
 
-	default Vector2D asReadOnly() {
+	default AbstractVector2D asReadOnly() {
 		Vector2D that = this;
-		return new Vector2D() {
+		return new AbstractVector2D() {
 
 			@Override
 			public int xToInt() {   return that.xToInt(); } 
@@ -73,7 +73,8 @@ public interface Vector2D {
 			public String yToString() {	return that.yToString();	}
 
 			@Override
-			public Vector2D asReadOnly() {	return this;	}
+			public AbstractVector2D asReadOnly() {	return this;	}
+
 		};
 	}
 
