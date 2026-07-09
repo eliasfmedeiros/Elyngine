@@ -3,13 +3,13 @@ package coordinate;
 public class Double2D extends AbstractVector2D implements FloatingVector2D {
 
 	public static Vector2D displacement(Vector2D initial,Vector2D terminal) {
-		return new Vector2D.BoxedVector2D(
-				new AbstractDouble() {
+		return new AbstractVector2D.Boxed(
+				new AbstractVector2D.Double() {
 					@Override public double doubleValue() {
 						return terminal.xToDouble() - initial.xToDouble();
 					}
 				},
-				new AbstractDouble() {
+				new AbstractVector2D.Double() {
 					@Override public double doubleValue() {
 						return terminal.yToDouble() - initial.yToDouble();
 					}

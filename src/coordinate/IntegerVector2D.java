@@ -5,7 +5,7 @@ import coordinate.Vector2D.ReadWriteVector2D;
 public interface IntegerVector2D extends ReadWriteVector2D {
 
 	public static Vector2D displacement(IntegerVector2D initial,IntegerVector2D terminal) {
-		return new Vector2D.BoxedVector2D(
+		return new AbstractVector2D.Boxed(
 				new AbstractInteger() {
 					@Override
 					public int intValue() {

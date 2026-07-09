@@ -2,11 +2,11 @@ package coordinate;
 
 public interface Vector2D {
 
-	public static final Vector2D ZERO = new Vector2D.BoxedVector2D(0f, 0f).asReadOnly();
-	public static final Vector2D UP =	new Vector2D.BoxedVector2D(0f, 1f).asReadOnly();
-	public static final Vector2D DOWN = new Vector2D.BoxedVector2D(0f, -1f).asReadOnly();
-	public static final Vector2D RIGH = new Vector2D.BoxedVector2D(1f, 0f).asReadOnly();
-	public static final Vector2D LEFT = new Vector2D.BoxedVector2D(-1f, 0f).asReadOnly();
+	public static final Vector2D ZERO = new AbstractVector2D.Boxed(0f, 0f).asReadOnly();
+	public static final Vector2D UP =	new AbstractVector2D.Boxed(0f, 1f).asReadOnly();
+	public static final Vector2D DOWN = new AbstractVector2D.Boxed(0f, -1f).asReadOnly();
+	public static final Vector2D RIGH = new AbstractVector2D.Boxed(1f, 0f).asReadOnly();
+	public static final Vector2D LEFT = new AbstractVector2D.Boxed(-1f, 0f).asReadOnly();
 
 	public static double degreesToRadians(double degrees) {
 		return Math.toRadians(degrees);
@@ -131,58 +131,6 @@ public interface Vector2D {
 	public interface ReadWriteVector2D extends Vector2D {
 		void resetOrderedPair();
 		ReadWriteVector2D copy();
-	}
-
-	public static final class BoxedVector2D implements ReadWriteVector2D {
-		public Number x, y;
-
-		public BoxedVector2D(Number x, Number y) {
-			this.x = x;
-			this.y = y;
-		}
-
-		@Override
-		public int xToInt() {	return x.intValue();	}
-
-		@Override
-		public float xToFloat() {	return x.floatValue();	}
-
-		@Override
-		public double xToDouble() {	return x.doubleValue();	}
-
-		@Override
-		public String xToString() {	return "" + x;	}
-
-		@Override
-		public int yToInt() {	return y.intValue();	}
-
-		@Override
-		public float yToFloat() {	return y.floatValue();	}
-
-		@Override
-		public double yToDouble() {	return y.doubleValue();	}
-
-		@Override
-		public String yToString() {	return "" + y;	}
-
-		@Override
-		public Vector2D.BoxedVector2D copy() {	return new BoxedVector2D(x, y);	}
-
-		@Override
-		public void resetOrderedPair() {
-			x=y=0;
-		}
-	}
-
-	public static abstract class AbstractDouble extends Number {
-		@Override
-		public int intValue() {	return (int) doubleValue();	}
-
-		@Override
-		public long longValue() {	return (long) doubleValue();	}
-
-		@Override
-		public float floatValue() {	return (float) doubleValue();	}
 	};
 
 }
