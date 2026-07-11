@@ -21,6 +21,27 @@ public class UniDeque<T> implements Collection<T> {
 		else node.setNext(lastNode.getNext());		
 		lastNode.setNext(node);
 	}
+	
+	public StackerNode<T> dump() {
+		StackerNode<T> dump = this.lastNode;
+		this.lastNode=null; 
+		return dump;
+	}
+	
+	public void clear() {
+		this.lastNode.setNext(null); // para gerar erro caso alguém esteja iterando a coleção
+		this.dump();
+	}
+	
+	private StackerNode<T> forgetFirstNode() {   
+		if(this.isEmpty()) return null;
+		if(lastNode.getNext()!=lastNode) return (StackerNode<T>) lastNode.popNext();
+		return this.dump();
+	}
+
+	private void moveFirstNodeToLast() {
+		lastNode=this.getFirstNode();
+	}
     //#endregion
 
 	@Override
@@ -89,12 +110,5 @@ public class UniDeque<T> implements Collection<T> {
 		// TODO Auto-generated method stub
 		throw new UnsupportedOperationException("Unimplemented method 'retainAll'");
 	}
-
-	@Override
-	public void clear() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'clear'");
-	}
-
 
 }
