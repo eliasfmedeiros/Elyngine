@@ -80,6 +80,28 @@ public class UniDeque<T> implements Collection<T> {
 	}
     //#endregion
 
+	//#region queue and stack
+	public T peek() { // booth
+		return this.getFirst();
+	}
+		
+	public void push(T content) { // stack
+		this.addFirst(content);
+	}
+
+	public void offer(T content) { // queue
+		this.addLast(content);
+	}
+
+	public T pop() { return this.removeFirst(); } // stack
+    
+	public T poll() { return this.removeFirst(); } // queue
+
+	public void offerThePoll() { // queue
+		if(!this.isEmpty()) this.moveFirstNodeToLast();
+	}
+    //#endregion
+	
 	@Override
 	public boolean contains(Object o) {
 		// TODO Auto-generated method stub
