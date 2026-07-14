@@ -102,6 +102,28 @@ public class UniDeque<T> implements Collection<T> {
 	}
     //#endregion
 	
+	public void dumpInto(UniDeque<T> that){
+		if(!this.isEmpty()) {
+			if(!that.isEmpty()) {
+				StackerNode<T> first=that.getFirstNode();
+				that.lastNode.setNext(this.getFirstNode());
+				this.lastNode.setNext(first);
+			}
+			that.lastNode=this.dump();
+		}
+	}
+	
+	public boolean popTo(UniDeque<T> stack) {
+		if(this.isEmpty()) return false;
+        stack.addFirstNode(this.forgetFirstNode());
+		return true;
+	}
+	public boolean pollTo(UniDeque<T> queue) {
+		if(this.popTo(queue)) queue.moveFirstNodeToLast();
+		else return false;
+		return true;
+	}
+	
 	@Override
 	public boolean contains(Object o) {
 		// TODO Auto-generated method stub
