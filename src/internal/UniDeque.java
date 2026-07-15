@@ -1,6 +1,8 @@
 package internal;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.function.Predicate;
+
 import internal.UnidirectionalNode.StackerNode;
 
 public class UniDeque<T> implements Collection<T> {
@@ -122,6 +124,21 @@ public class UniDeque<T> implements Collection<T> {
 		if(this.popTo(queue)) queue.moveFirstNodeToLast();
 		else return false;
 		return true;
+	}
+	
+	public UniDeque<T> partition(Predicate<T> removal){
+		UniDeque<T> accepted=new UniDeque<>(),rejected=new UniDeque<>();
+		while(!this.isEmpty())
+			this.pollTo(removal.test(this.getFirst())?rejected:accepted);
+		accepted.dumpInto(this);
+		return rejected;
+	}
+
+	public UniDeque<T> invert() {
+		UniDeque<T> stack=new UniDeque<>();
+		while(this.popTo(stack)) continue;	
+		stack.dumpInto(this);
+		return this;
 	}
 	
 	@Override
